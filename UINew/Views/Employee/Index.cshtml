@@ -1,0 +1,111 @@
+﻿@model List<DTO.EmployeeVM>
+@{
+    ViewBag.Title = "Employee List";
+    int i = 1;
+}
+
+<script src="~/Content/DeleteRecord.js"></script>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    Sba Employee List
+                    @{
+                        if (User.IsInRole("Superadmin") || User.IsInRole("Admin"))
+                        {
+                            <a style="padding-left: 710px;" href="/employee/create">Add Employee</a>
+                        }
+                    }
+                </h4>
+
+                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("Superadmin") || User.IsInRole("Admin"))
+                                {
+                                    <th>#</th>
+                                }
+                            }
+                            <th>SNo</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Designation</th>
+                            <th>District</th>
+                            <th>Block</th>
+                            <th>Facility</th>
+                            <th>Trained</th>
+                            <th>Training Completion Year</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                        <tr id="srb_@item.EmployeeId">
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("Superadmin") || User.IsInRole("Admin"))
+                                {
+
+                                    <td>
+                                        <a href="/Employee/Edit/@item.EmployeeId" class="pe-2">
+                                            <img src="~/Content/icons/edit.png" height="20" width="20" />
+                                        </a>
+
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalmessage">
+                                            <img src="~/Content/icons/delete-16.ico" onclick="AskQuestion('/Employee/DeleteEmployee/',@item.EmployeeId)" />
+                                        </a>
+
+                                    </td>
+                                }
+                            }
+                            <td>@(i++)</td>
+                            <td>@item.Name</td>
+                            <td>@item.MobileNumber</td>
+                            <td>@item.DesignationName</td>
+                            <td>@item.DistrictName</td>
+                            <td>@item.BlockName</td>
+                            <td>@item.FacilityName</td>
+                            <td>
+                                @if (item.Istrained == false)
+                                {
+
+                                    <span>No</span>
+                                }
+                                else
+                                { <span>Yes</span>}
+                            </td>
+                            <td>
+                                @if (item.TrainingCompletionYear.HasValue)
+                                {@item.TrainingCompletionYear.Value.ToString("MMMM yyyy") }
+                            else
+                            { <span>N/A</span>
+                            }
+                            </td>
+                            <td>@item.AddDate.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                        }
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <!-- end col -->
+</div>
+
+
+@Html.Partial("~/Views/Shared/ModalMessage.cshtml")
+
+

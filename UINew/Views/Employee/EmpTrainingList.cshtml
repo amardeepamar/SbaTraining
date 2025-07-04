@@ -1,0 +1,87 @@
+﻿@model List<DTO.TrainingVM>
+
+@{
+    ViewBag.Title = "Employee Training List";
+    int i = 1;
+}
+
+
+<script src="~/Content/DeleteRecord.js"></script>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    Sba Training List
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Superadmin") || User.IsInRole("Admin"))
+                        {
+                            <a href="/Employee/AddEmpTraining" style="padding-left:740px;">Add Training</a>
+                        }
+                    }
+
+                </h4>
+                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("Superadmin") || User.IsInRole("Admin"))
+                                {
+                                    <th>#</th>
+                                }
+                            }
+                            <th>SNo</th>
+                            <th>Month/Year</th>
+                            <th>Employee Infomation</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>Batch</th>
+                            <th>Entry Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr id="srb_@item.Id">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Superadmin") || User.IsInRole("Admin"))
+                                    {
+                                        <td>                                            
+                                            <a href="/Employee/UpdateEmpTraining/@item.Id" class="pe-2">
+                                                <img src="~/Content/icons/edit.png" height="20" width="20" />
+                                            </a>
+
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalmessage">
+                                                <img src="~/Content/icons/delete-16.ico" onclick="AskQuestion('/Employee/DeleteEmployeeTraining/',@item.Id)" />
+                                            </a>
+                                        </td>
+                                    }
+                                }
+                            <td>@(i++)</td>
+                                <td>@item.MonthYearName</td>
+                                <td>@item.EmployeeName (@item.EmployeeDist)</td>
+                                <td>@item.FromDate.ToString("MM/dd/yyyy")</td>
+                                <td>@item.ToDate.Date.ToString("MM/dd/yyyy")</td>
+                                <td>@item.BatchName</td>
+                                <td>@item.AddDate.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <!-- end col -->
+</div>
+
+@Html.Partial("~/Views/Shared/ModalMessage.cshtml")
+
+

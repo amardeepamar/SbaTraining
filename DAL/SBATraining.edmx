@@ -1,0 +1,1499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="shsbTrainingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlockMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlockNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BlockNameHn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="DistrictId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DesignationMaster">
+          <Key>
+            <PropertyRef Name="DesignationId" />
+          </Key>
+          <Property Name="DesignationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DesignationEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DesignationHn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="AddDate" Type="date" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DistrictMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DistrictNameHn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee_info">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DesignationId" Type="int" Nullable="false" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="DistrictId" Type="int" Nullable="false" />
+          <Property Name="BlockId" Type="int" Nullable="false" />
+          <Property Name="FacilityId" Type="int" Nullable="false" />
+          <Property Name="Istrained" Type="bit" />
+          <Property Name="AddDate" Type="date" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="date" Nullable="false" />
+          <Property Name="TrainingCompletionYear" Type="date" />
+        </EntityType>
+        <EntityType Name="Employee_Training">
+          <Key>
+            <PropertyRef Name="TrainingId" />
+          </Key>
+          <Property Name="TrainingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MonthYearId" Type="int" Nullable="false" />
+          <Property Name="DesignationId" Type="int" Nullable="false" />
+          <Property Name="Employee_infoId" Type="int" Nullable="false" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
+          <Property Name="AddDate" Type="date" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="date" Nullable="false" />
+          <Property Name="BatchId" Type="int" />
+          <Property Name="Istrained" Type="bit" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="int" Nullable="false" />
+          <Property Name="ErrorMessage" Type="varchar" MaxLength="500" />
+          <Property Name="StackTrace" Type="varchar" MaxLength="500" />
+          <Property Name="ErrorDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FacilityMaster">
+          <Key>
+            <PropertyRef Name="FacilityId" />
+          </Key>
+          <Property Name="FacilityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacilityName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FacilityType" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DistrictID" Type="int" Nullable="false" />
+          <Property Name="BlockID" Type="int" Nullable="false" />
+          <Property Name="AddDate" Type="date" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="HFR_ID" Type="varchar" MaxLength="50" />
+          <Property Name="NIN" Type="varchar" MaxLength="50" />
+          <Property Name="Coordinate" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Log_Table">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IPAdress" Type="nvarchar(max)" />
+          <Property Name="ProcessID" Type="int" Nullable="false" />
+          <Property Name="ProcessType" Type="int" Nullable="false" />
+          <Property Name="ProcessCategoryType" Type="nvarchar(max)" />
+          <Property Name="ProcessDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginMasters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="NameSurname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="AddDate" Type="date" Nullable="false" />
+          <Property Name="LastUpdateUserID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="date" Nullable="false" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="DistId" Type="int" />
+          <Property Name="BlockId" Type="int" />
+          <Property Name="FacilityId" Type="int" />
+        </EntityType>
+        <EntityType Name="MonthYearMaster">
+          <Key>
+            <PropertyRef Name="MonthYearId" />
+          </Key>
+          <Property Name="MonthYearId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MonthYearName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="AddDate" Type="date" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProcessType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcessName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RoleMasters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="AddDate" Type="date" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBatchMaster">
+          <Key>
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="BatchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchName" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Position" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <Association Name="FK_BlockMaster_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="0..1" />
+          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlockMaster">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesignationMaster_SBATraining">
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="1" />
+          <End Role="DesignationMaster" Type="Self.DesignationMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_Training">
+              <PropertyRef Name="TrainingId" />
+            </Principal>
+            <Dependent Role="DesignationMaster">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesignationMasterEmployeeInfo">
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="1" />
+          <End Role="DesignationMaster" Type="Self.DesignationMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_info">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DesignationMaster">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_BlockMaster">
+          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlockMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="BlockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_DesignationMaster">
+          <End Role="DesignationMaster" Type="Self.DesignationMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesignationMaster">
+              <PropertyRef Name="DesignationId" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_FacilityMaster">
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityMaster">
+              <PropertyRef Name="FacilityId" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_LoginMasters">
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_DesignationMaster">
+          <End Role="DesignationMaster" Type="Self.DesignationMaster" Multiplicity="1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesignationMaster">
+              <PropertyRef Name="DesignationId" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_Employee_info">
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_info">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="Employee_infoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_LoginMasters">
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_MonthYearMaster">
+          <End Role="MonthYearMaster" Type="Self.MonthYearMaster" Multiplicity="1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonthYearMaster">
+              <PropertyRef Name="MonthYearId" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="MonthYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_tblBatchMaster">
+          <End Role="tblBatchMaster" Type="Self.tblBatchMaster" Multiplicity="0..1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBatchMaster">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityMaster_BlockMaster">
+          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="1" />
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlockMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityMaster">
+              <PropertyRef Name="BlockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityMaster_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="1" />
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityMaster">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityMaster_LoginMasters">
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="1" />
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityMaster">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_Table_ProcessType">
+          <End Role="ProcessType" Type="Self.ProcessType" Multiplicity="1" />
+          <End Role="Log_Table" Type="Self.Log_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Log_Table">
+              <PropertyRef Name="ProcessType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_BlockMaster">
+          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlockMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="BlockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="DistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_FacilityMaster">
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityMaster">
+              <PropertyRef Name="FacilityId" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_RoleMasters">
+          <End Role="RoleMasters" Type="Self.RoleMasters" Multiplicity="1" />
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployee_tblEmployee">
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="0..1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_Report_TotalREgistration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DistID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_TotalStaffNurseUnTrained" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DistID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_TotalTrainedANM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DistID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_TotalTrainedStaffNurse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DistID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_TotalUnTrainedANM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DistID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="shsbTrainingModelStoreContainer">
+          <EntitySet Name="BlockMaster" EntityType="Self.BlockMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesignationMaster" EntityType="Self.DesignationMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DistrictMaster" EntityType="Self.DistrictMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_info" EntityType="Self.Employee_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_Training" EntityType="Self.Employee_Training" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacilityMaster" EntityType="Self.FacilityMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log_Table" EntityType="Self.Log_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginMasters" EntityType="Self.LoginMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthYearMaster" EntityType="Self.MonthYearMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessType" EntityType="Self.ProcessType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMasters" EntityType="Self.RoleMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBatchMaster" EntityType="Self.tblBatchMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BlockMaster_DistrictMaster" Association="Self.FK_BlockMaster_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMaster" />
+            <End Role="BlockMaster" EntitySet="BlockMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesignationMaster_SBATraining" Association="Self.FK_DesignationMaster_SBATraining">
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+            <End Role="DesignationMaster" EntitySet="DesignationMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesignationMasterEmployeeInfo" Association="Self.FK_DesignationMasterEmployeeInfo">
+            <End Role="Employee_info" EntitySet="Employee_info" />
+            <End Role="DesignationMaster" EntitySet="DesignationMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_BlockMaster" Association="Self.FK_Employee_info_BlockMaster">
+            <End Role="BlockMaster" EntitySet="BlockMaster" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_DesignationMaster" Association="Self.FK_Employee_info_DesignationMaster">
+            <End Role="DesignationMaster" EntitySet="DesignationMaster" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_DistrictMaster" Association="Self.FK_Employee_info_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMaster" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_FacilityMaster" Association="Self.FK_Employee_info_FacilityMaster">
+            <End Role="FacilityMaster" EntitySet="FacilityMaster" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_LoginMasters" Association="Self.FK_Employee_info_LoginMasters">
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_DesignationMaster" Association="Self.FK_Employee_Training_DesignationMaster">
+            <End Role="DesignationMaster" EntitySet="DesignationMaster" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_Employee_info" Association="Self.FK_Employee_Training_Employee_info">
+            <End Role="Employee_info" EntitySet="Employee_info" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_LoginMasters" Association="Self.FK_Employee_Training_LoginMasters">
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_MonthYearMaster" Association="Self.FK_Employee_Training_MonthYearMaster">
+            <End Role="MonthYearMaster" EntitySet="MonthYearMaster" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_tblBatchMaster" Association="Self.FK_Employee_Training_tblBatchMaster">
+            <End Role="tblBatchMaster" EntitySet="tblBatchMaster" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityMaster_BlockMaster" Association="Self.FK_FacilityMaster_BlockMaster">
+            <End Role="BlockMaster" EntitySet="BlockMaster" />
+            <End Role="FacilityMaster" EntitySet="FacilityMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityMaster_DistrictMaster" Association="Self.FK_FacilityMaster_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMaster" />
+            <End Role="FacilityMaster" EntitySet="FacilityMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityMaster_LoginMasters" Association="Self.FK_FacilityMaster_LoginMasters">
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+            <End Role="FacilityMaster" EntitySet="FacilityMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_Table_ProcessType" Association="Self.FK_Log_Table_ProcessType">
+            <End Role="ProcessType" EntitySet="ProcessType" />
+            <End Role="Log_Table" EntitySet="Log_Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_BlockMaster" Association="Self.FK_LoginMasters_BlockMaster">
+            <End Role="BlockMaster" EntitySet="BlockMaster" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_DistrictMaster" Association="Self.FK_LoginMasters_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMaster" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_FacilityMaster" Association="Self.FK_LoginMasters_FacilityMaster">
+            <End Role="FacilityMaster" EntitySet="FacilityMaster" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_RoleMasters" Association="Self.FK_LoginMasters_RoleMasters">
+            <End Role="RoleMasters" EntitySet="RoleMasters" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployee_tblEmployee" Association="Self.FK_tblEmployee_tblEmployee">
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shsbTrainingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BlockMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlockNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BlockNameHn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="DistrictId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DistrictMaster" Relationship="Self.FK_BlockMaster_DistrictMaster" FromRole="BlockMaster" ToRole="DistrictMaster" />
+          <NavigationProperty Name="Employee_info" Relationship="Self.FK_Employee_info_BlockMaster" FromRole="BlockMaster" ToRole="Employee_info" />
+          <NavigationProperty Name="FacilityMasters" Relationship="Self.FK_FacilityMaster_BlockMaster" FromRole="BlockMaster" ToRole="FacilityMaster" />
+          <NavigationProperty Name="LoginMasters" Relationship="Self.FK_LoginMasters_BlockMaster" FromRole="BlockMaster" ToRole="LoginMasters" />
+        </EntityType>
+        <EntityType Name="DesignationMaster">
+          <Key>
+            <PropertyRef Name="DesignationId" />
+          </Key>
+          <Property Name="DesignationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DesignationEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DesignationHn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee_Training" Relationship="Self.FK_DesignationMaster_SBATraining" FromRole="DesignationMaster" ToRole="Employee_Training" />
+          <NavigationProperty Name="Employee_info" Relationship="Self.FK_DesignationMasterEmployeeInfo" FromRole="DesignationMaster" ToRole="Employee_info" />
+          <NavigationProperty Name="Employee_info1" Relationship="Self.FK_Employee_info_DesignationMaster" FromRole="DesignationMaster" ToRole="Employee_info" />
+          <NavigationProperty Name="Employee_Training1" Relationship="Self.FK_Employee_Training_DesignationMaster" FromRole="DesignationMaster" ToRole="Employee_Training" />
+        </EntityType>
+        <EntityType Name="DistrictMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DistrictNameHn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BlockMasters" Relationship="Self.FK_BlockMaster_DistrictMaster" FromRole="DistrictMaster" ToRole="BlockMaster" />
+          <NavigationProperty Name="Employee_info" Relationship="Self.FK_Employee_info_DistrictMaster" FromRole="DistrictMaster" ToRole="Employee_info" />
+          <NavigationProperty Name="FacilityMasters" Relationship="Self.FK_FacilityMaster_DistrictMaster" FromRole="DistrictMaster" ToRole="FacilityMaster" />
+          <NavigationProperty Name="LoginMasters" Relationship="Self.FK_LoginMasters_DistrictMaster" FromRole="DistrictMaster" ToRole="LoginMasters" />
+        </EntityType>
+        <EntityType Name="Employee_info">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DesignationId" Type="Int32" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DistrictId" Type="Int32" Nullable="false" />
+          <Property Name="BlockId" Type="Int32" Nullable="false" />
+          <Property Name="FacilityId" Type="Int32" Nullable="false" />
+          <Property Name="Istrained" Type="Boolean" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TrainingCompletionYear" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BlockMaster" Relationship="Self.FK_Employee_info_BlockMaster" FromRole="Employee_info" ToRole="BlockMaster" />
+          <NavigationProperty Name="DesignationMaster" Relationship="Self.FK_DesignationMasterEmployeeInfo" FromRole="Employee_info" ToRole="DesignationMaster" />
+          <NavigationProperty Name="DesignationMaster1" Relationship="Self.FK_Employee_info_DesignationMaster" FromRole="Employee_info" ToRole="DesignationMaster" />
+          <NavigationProperty Name="DistrictMaster" Relationship="Self.FK_Employee_info_DistrictMaster" FromRole="Employee_info" ToRole="DistrictMaster" />
+          <NavigationProperty Name="FacilityMaster" Relationship="Self.FK_Employee_info_FacilityMaster" FromRole="Employee_info" ToRole="FacilityMaster" />
+          <NavigationProperty Name="LoginMaster" Relationship="Self.FK_Employee_info_LoginMasters" FromRole="Employee_info" ToRole="LoginMasters" />
+          <NavigationProperty Name="Employee_Training" Relationship="Self.FK_Employee_Training_Employee_info" FromRole="Employee_info" ToRole="Employee_Training" />
+        </EntityType>
+        <EntityType Name="Employee_Training">
+          <Key>
+            <PropertyRef Name="TrainingId" />
+          </Key>
+          <Property Name="TrainingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MonthYearId" Type="Int32" Nullable="false" />
+          <Property Name="DesignationId" Type="Int32" Nullable="false" />
+          <Property Name="Employee_infoId" Type="Int32" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BatchId" Type="Int32" />
+          <Property Name="Istrained" Type="Boolean" />
+          <NavigationProperty Name="DesignationMaster" Relationship="Self.FK_DesignationMaster_SBATraining" FromRole="Employee_Training" ToRole="DesignationMaster" />
+          <NavigationProperty Name="DesignationMaster1" Relationship="Self.FK_Employee_Training_DesignationMaster" FromRole="Employee_Training" ToRole="DesignationMaster" />
+          <NavigationProperty Name="Employee_info" Relationship="Self.FK_Employee_Training_Employee_info" FromRole="Employee_Training" ToRole="Employee_info" />
+          <NavigationProperty Name="LoginMaster" Relationship="Self.FK_Employee_Training_LoginMasters" FromRole="Employee_Training" ToRole="LoginMasters" />
+          <NavigationProperty Name="MonthYearMaster" Relationship="Self.FK_Employee_Training_MonthYearMaster" FromRole="Employee_Training" ToRole="MonthYearMaster" />
+          <NavigationProperty Name="tblBatchMaster" Relationship="Self.FK_Employee_Training_tblBatchMaster" FromRole="Employee_Training" ToRole="tblBatchMaster" />
+        </EntityType>
+        <EntityType Name="FacilityMaster">
+          <Key>
+            <PropertyRef Name="FacilityId" />
+          </Key>
+          <Property Name="FacilityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacilityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FacilityType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DistrictID" Type="Int32" Nullable="false" />
+          <Property Name="BlockID" Type="Int32" Nullable="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BlockMaster" Relationship="Self.FK_FacilityMaster_BlockMaster" FromRole="FacilityMaster" ToRole="BlockMaster" />
+          <NavigationProperty Name="DistrictMaster" Relationship="Self.FK_FacilityMaster_DistrictMaster" FromRole="FacilityMaster" ToRole="DistrictMaster" />
+          <NavigationProperty Name="Employee_info" Relationship="Self.FK_Employee_info_FacilityMaster" FromRole="FacilityMaster" ToRole="Employee_info" />
+          <NavigationProperty Name="LoginMaster" Relationship="Self.FK_FacilityMaster_LoginMasters" FromRole="FacilityMaster" ToRole="LoginMasters" />
+          <NavigationProperty Name="LoginMasters" Relationship="Self.FK_LoginMasters_FacilityMaster" FromRole="FacilityMaster" ToRole="LoginMasters" />
+          <Property Name="HFR_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Coordinate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Log_Table">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IPAdress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessID" Type="Int32" Nullable="false" />
+          <Property Name="ProcessType" Type="Int32" Nullable="false" />
+          <Property Name="ProcessCategoryType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProcessType1" Relationship="Self.FK_Log_Table_ProcessType" FromRole="Log_Table" ToRole="ProcessType" />
+        </EntityType>
+        <EntityType Name="LoginMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NameSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="DistId" Type="Int32" />
+          <Property Name="BlockId" Type="Int32" />
+          <Property Name="FacilityId" Type="Int32" />
+          <NavigationProperty Name="BlockMaster" Relationship="Self.FK_LoginMasters_BlockMaster" FromRole="LoginMasters" ToRole="BlockMaster" />
+          <NavigationProperty Name="DistrictMaster" Relationship="Self.FK_LoginMasters_DistrictMaster" FromRole="LoginMasters" ToRole="DistrictMaster" />
+          <NavigationProperty Name="Employee_info" Relationship="Self.FK_Employee_info_LoginMasters" FromRole="LoginMasters" ToRole="Employee_info" />
+          <NavigationProperty Name="Employee_Training" Relationship="Self.FK_Employee_Training_LoginMasters" FromRole="LoginMasters" ToRole="Employee_Training" />
+          <NavigationProperty Name="FacilityMasters" Relationship="Self.FK_FacilityMaster_LoginMasters" FromRole="LoginMasters" ToRole="FacilityMaster" />
+          <NavigationProperty Name="FacilityMaster" Relationship="Self.FK_LoginMasters_FacilityMaster" FromRole="LoginMasters" ToRole="FacilityMaster" />
+          <NavigationProperty Name="RoleMaster" Relationship="Self.FK_LoginMasters_RoleMasters" FromRole="LoginMasters" ToRole="RoleMasters" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK_tblEmployee_tblEmployee" FromRole="LoginMasters" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="MonthYearMaster">
+          <Key>
+            <PropertyRef Name="MonthYearId" />
+          </Key>
+          <Property Name="MonthYearId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MonthYearName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee_Training" Relationship="Self.FK_Employee_Training_MonthYearMaster" FromRole="MonthYearMaster" ToRole="Employee_Training" />
+        </EntityType>
+        <EntityType Name="ProcessType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcessName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Log_Table" Relationship="Self.FK_Log_Table_ProcessType" FromRole="ProcessType" ToRole="Log_Table" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="LoginMasters" Relationship="Self.FK_LoginMasters_RoleMasters" FromRole="RoleMasters" ToRole="LoginMasters" />
+        </EntityType>
+        <EntityType Name="tblBatchMaster">
+          <Key>
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="BatchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Employee_Training" Relationship="Self.FK_Employee_Training_tblBatchMaster" FromRole="tblBatchMaster" ToRole="Employee_Training" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="LoginMaster" Relationship="Self.FK_tblEmployee_tblEmployee" FromRole="tblEmployee" ToRole="LoginMasters" />
+        </EntityType>
+        <Association Name="FK_BlockMaster_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="0..1" />
+          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlockMaster">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_BlockMaster">
+          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlockMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="BlockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityMaster_BlockMaster">
+          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="1" />
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlockMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityMaster">
+              <PropertyRef Name="BlockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_BlockMaster">
+          <End Role="BlockMaster" Type="Self.BlockMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlockMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="BlockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesignationMaster_SBATraining">
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="1" />
+          <End Role="DesignationMaster" Type="Self.DesignationMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_Training">
+              <PropertyRef Name="TrainingId" />
+            </Principal>
+            <Dependent Role="DesignationMaster">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesignationMasterEmployeeInfo">
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="1" />
+          <End Role="DesignationMaster" Type="Self.DesignationMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_info">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DesignationMaster">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_DesignationMaster">
+          <End Role="DesignationMaster" Type="Self.DesignationMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesignationMaster">
+              <PropertyRef Name="DesignationId" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_DesignationMaster">
+          <End Role="DesignationMaster" Type="Self.DesignationMaster" Multiplicity="1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesignationMaster">
+              <PropertyRef Name="DesignationId" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityMaster_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="1" />
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityMaster">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="DistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_FacilityMaster">
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityMaster">
+              <PropertyRef Name="FacilityId" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_info_LoginMasters">
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="1" />
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_info">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_Employee_info">
+          <End Role="Employee_info" Type="Self.Employee_info" Multiplicity="1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_info">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="Employee_infoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_LoginMasters">
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_MonthYearMaster">
+          <End Role="MonthYearMaster" Type="Self.MonthYearMaster" Multiplicity="1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonthYearMaster">
+              <PropertyRef Name="MonthYearId" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="MonthYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Training_tblBatchMaster">
+          <End Role="tblBatchMaster" Type="Self.tblBatchMaster" Multiplicity="0..1" />
+          <End Role="Employee_Training" Type="Self.Employee_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBatchMaster">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="Employee_Training">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityMaster_LoginMasters">
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="1" />
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityMaster">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_FacilityMaster">
+          <End Role="FacilityMaster" Type="Self.FacilityMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityMaster">
+              <PropertyRef Name="FacilityId" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_Table_ProcessType">
+          <End Role="ProcessType" Type="Self.ProcessType" Multiplicity="1" />
+          <End Role="Log_Table" Type="Self.Log_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Log_Table">
+              <PropertyRef Name="ProcessType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_RoleMasters">
+          <End Role="RoleMasters" Type="Self.RoleMaster" Multiplicity="1" />
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployee_tblEmployee">
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="0..1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="shsbTrainingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BlockMasters" EntityType="Self.BlockMaster" />
+          <EntitySet Name="DesignationMasters" EntityType="Self.DesignationMaster" />
+          <EntitySet Name="DistrictMasters" EntityType="Self.DistrictMaster" />
+          <EntitySet Name="Employee_info" EntityType="Self.Employee_info" />
+          <EntitySet Name="Employee_Training" EntityType="Self.Employee_Training" />
+          <EntitySet Name="FacilityMasters" EntityType="Self.FacilityMaster" />
+          <EntitySet Name="Log_Table" EntityType="Self.Log_Table" />
+          <EntitySet Name="LoginMasters" EntityType="Self.LoginMaster" />
+          <EntitySet Name="MonthYearMasters" EntityType="Self.MonthYearMaster" />
+          <EntitySet Name="ProcessTypes" EntityType="Self.ProcessType" />
+          <EntitySet Name="RoleMasters" EntityType="Self.RoleMaster" />
+          <EntitySet Name="tblBatchMasters" EntityType="Self.tblBatchMaster" />
+          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+          <AssociationSet Name="FK_BlockMaster_DistrictMaster" Association="Self.FK_BlockMaster_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMasters" />
+            <End Role="BlockMaster" EntitySet="BlockMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_BlockMaster" Association="Self.FK_Employee_info_BlockMaster">
+            <End Role="BlockMaster" EntitySet="BlockMasters" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityMaster_BlockMaster" Association="Self.FK_FacilityMaster_BlockMaster">
+            <End Role="BlockMaster" EntitySet="BlockMasters" />
+            <End Role="FacilityMaster" EntitySet="FacilityMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_BlockMaster" Association="Self.FK_LoginMasters_BlockMaster">
+            <End Role="BlockMaster" EntitySet="BlockMasters" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesignationMaster_SBATraining" Association="Self.FK_DesignationMaster_SBATraining">
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+            <End Role="DesignationMaster" EntitySet="DesignationMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesignationMasterEmployeeInfo" Association="Self.FK_DesignationMasterEmployeeInfo">
+            <End Role="Employee_info" EntitySet="Employee_info" />
+            <End Role="DesignationMaster" EntitySet="DesignationMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_DesignationMaster" Association="Self.FK_Employee_info_DesignationMaster">
+            <End Role="DesignationMaster" EntitySet="DesignationMasters" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_DesignationMaster" Association="Self.FK_Employee_Training_DesignationMaster">
+            <End Role="DesignationMaster" EntitySet="DesignationMasters" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_DistrictMaster" Association="Self.FK_Employee_info_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMasters" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityMaster_DistrictMaster" Association="Self.FK_FacilityMaster_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMasters" />
+            <End Role="FacilityMaster" EntitySet="FacilityMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_DistrictMaster" Association="Self.FK_LoginMasters_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMasters" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_FacilityMaster" Association="Self.FK_Employee_info_FacilityMaster">
+            <End Role="FacilityMaster" EntitySet="FacilityMasters" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_info_LoginMasters" Association="Self.FK_Employee_info_LoginMasters">
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+            <End Role="Employee_info" EntitySet="Employee_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_Employee_info" Association="Self.FK_Employee_Training_Employee_info">
+            <End Role="Employee_info" EntitySet="Employee_info" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_LoginMasters" Association="Self.FK_Employee_Training_LoginMasters">
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_MonthYearMaster" Association="Self.FK_Employee_Training_MonthYearMaster">
+            <End Role="MonthYearMaster" EntitySet="MonthYearMasters" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Training_tblBatchMaster" Association="Self.FK_Employee_Training_tblBatchMaster">
+            <End Role="tblBatchMaster" EntitySet="tblBatchMasters" />
+            <End Role="Employee_Training" EntitySet="Employee_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityMaster_LoginMasters" Association="Self.FK_FacilityMaster_LoginMasters">
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+            <End Role="FacilityMaster" EntitySet="FacilityMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_FacilityMaster" Association="Self.FK_LoginMasters_FacilityMaster">
+            <End Role="FacilityMaster" EntitySet="FacilityMasters" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_Table_ProcessType" Association="Self.FK_Log_Table_ProcessType">
+            <End Role="ProcessType" EntitySet="ProcessTypes" />
+            <End Role="Log_Table" EntitySet="Log_Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_RoleMasters" Association="Self.FK_LoginMasters_RoleMasters">
+            <End Role="RoleMasters" EntitySet="RoleMasters" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployee_tblEmployee" Association="Self.FK_tblEmployee_tblEmployee">
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <FunctionImport Name="SP_Report_TotalREgistration" ReturnType="Collection(shsbTrainingModel.SP_Report_TotalREgistration_Result)">
+          <Parameter Name="DistID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_TotalStaffNurseUnTrained" ReturnType="Collection(shsbTrainingModel.SP_TotalStaffNurseUnTrained_Result)">
+          <Parameter Name="DistID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_TotalTrainedANM" ReturnType="Collection(shsbTrainingModel.SP_TotalTrainedANM_Result)">
+          <Parameter Name="DistID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_TotalTrainedStaffNurse" ReturnType="Collection(shsbTrainingModel.SP_TotalTrainedStaffNurse_Result)">
+          <Parameter Name="DistID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_TotalUnTrainedANM" ReturnType="Collection(shsbTrainingModel.SP_TotalUnTrainedANM_Result)">
+          <Parameter Name="DistID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ErrorLogs" EntityType="shsbTrainingModel.ErrorLog" />
+        </EntityContainer>
+        <ComplexType Name="SP_Report_TotalREgistration_Result">
+          <Property Type="Int64" Name="SN" Nullable="true" />
+          <Property Type="String" Name="DistrictNameEn" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Trained_Staff_Nurse" Nullable="false" />
+          <Property Type="Int32" Name="Total_UnTrained_Staff_Nurse" Nullable="false" />
+          <Property Type="Int32" Name="Total_Trained_ANM" Nullable="false" />
+          <Property Type="Int32" Name="Total_UnTrained_ANM" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_TotalStaffNurseUnTrained_Result">
+          <Property Type="Int64" Name="SN" Nullable="true" />
+          <Property Type="String" Name="DistrictNameEn" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_UnTrained_Staff_Nurse" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_TotalTrainedANM_Result">
+          <Property Type="Int64" Name="SN" Nullable="true" />
+          <Property Type="String" Name="DistrictNameEn" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Trained_ANM" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_TotalTrainedStaffNurse_Result">
+          <Property Type="Int64" Name="SN" Nullable="true" />
+          <Property Type="String" Name="DistrictNameEn" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Trained_Staff_Nurse" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_TotalUnTrainedANM_Result">
+          <Property Type="Int64" Name="SN" Nullable="true" />
+          <Property Type="String" Name="DistrictNameEn" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_UnTrained_ANM" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="Int32" Nullable="false" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="StackTrace" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorDate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="shsbTrainingModelStoreContainer" CdmEntityContainer="shsbTrainingEntities">
+          <EntitySetMapping Name="BlockMasters">
+            <EntityTypeMapping TypeName="shsbTrainingModel.BlockMaster">
+              <MappingFragment StoreEntitySet="BlockMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BlockNameEn" ColumnName="BlockNameEn" />
+                <ScalarProperty Name="BlockNameHn" ColumnName="BlockNameHn" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesignationMasters">
+            <EntityTypeMapping TypeName="shsbTrainingModel.DesignationMaster">
+              <MappingFragment StoreEntitySet="DesignationMaster">
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="DesignationEn" ColumnName="DesignationEn" />
+                <ScalarProperty Name="DesignationHn" ColumnName="DesignationHn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DistrictMasters">
+            <EntityTypeMapping TypeName="shsbTrainingModel.DistrictMaster">
+              <MappingFragment StoreEntitySet="DistrictMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DistrictNameEn" ColumnName="DistrictNameEn" />
+                <ScalarProperty Name="DistrictNameHn" ColumnName="DistrictNameHn" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_info">
+            <EntityTypeMapping TypeName="shsbTrainingModel.Employee_info">
+              <MappingFragment StoreEntitySet="Employee_info">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="BlockId" ColumnName="BlockId" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="Istrained" ColumnName="Istrained" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="TrainingCompletionYear" ColumnName="TrainingCompletionYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_Training">
+            <EntityTypeMapping TypeName="shsbTrainingModel.Employee_Training">
+              <MappingFragment StoreEntitySet="Employee_Training">
+                <ScalarProperty Name="TrainingId" ColumnName="TrainingId" />
+                <ScalarProperty Name="MonthYearId" ColumnName="MonthYearId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="Employee_infoId" ColumnName="Employee_infoId" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Istrained" ColumnName="Istrained" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilityMasters">
+            <EntityTypeMapping TypeName="shsbTrainingModel.FacilityMaster">
+              <MappingFragment StoreEntitySet="FacilityMaster">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="NIN" ColumnName="NIN" />
+                <ScalarProperty Name="HFR_ID" ColumnName="HFR_ID" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+                <ScalarProperty Name="FacilityType" ColumnName="FacilityType" />
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log_Table">
+            <EntityTypeMapping TypeName="shsbTrainingModel.Log_Table">
+              <MappingFragment StoreEntitySet="Log_Table">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IPAdress" ColumnName="IPAdress" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+                <ScalarProperty Name="ProcessType" ColumnName="ProcessType" />
+                <ScalarProperty Name="ProcessCategoryType" ColumnName="ProcessCategoryType" />
+                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginMasters">
+            <EntityTypeMapping TypeName="shsbTrainingModel.LoginMaster">
+              <MappingFragment StoreEntitySet="LoginMasters">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateUserID" ColumnName="LastUpdateUserID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="DistId" ColumnName="DistId" />
+                <ScalarProperty Name="BlockId" ColumnName="BlockId" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthYearMasters">
+            <EntityTypeMapping TypeName="shsbTrainingModel.MonthYearMaster">
+              <MappingFragment StoreEntitySet="MonthYearMaster">
+                <ScalarProperty Name="MonthYearId" ColumnName="MonthYearId" />
+                <ScalarProperty Name="MonthYearName" ColumnName="MonthYearName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessTypes">
+            <EntityTypeMapping TypeName="shsbTrainingModel.ProcessType">
+              <MappingFragment StoreEntitySet="ProcessType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMasters">
+            <EntityTypeMapping TypeName="shsbTrainingModel.RoleMaster">
+              <MappingFragment StoreEntitySet="RoleMasters">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBatchMasters">
+            <EntityTypeMapping TypeName="shsbTrainingModel.tblBatchMaster">
+              <MappingFragment StoreEntitySet="tblBatchMaster">
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmployees">
+            <EntityTypeMapping TypeName="shsbTrainingModel.tblEmployee">
+              <MappingFragment StoreEntitySet="tblEmployee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Report_TotalREgistration" FunctionName="shsbTrainingModel.Store.SP_Report_TotalREgistration">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="shsbTrainingModel.SP_Report_TotalREgistration_Result">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="DistrictNameEn" ColumnName="DistrictNameEn" />
+                <ScalarProperty Name="Total_Trained_Staff_Nurse" ColumnName="Total Trained Staff Nurse" />
+                <ScalarProperty Name="Total_UnTrained_Staff_Nurse" ColumnName="Total UnTrained Staff Nurse" />
+                <ScalarProperty Name="Total_Trained_ANM" ColumnName="Total Trained ANM" />
+                <ScalarProperty Name="Total_UnTrained_ANM" ColumnName="Total UnTrained ANM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_TotalStaffNurseUnTrained" FunctionName="shsbTrainingModel.Store.SP_TotalStaffNurseUnTrained">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="shsbTrainingModel.SP_TotalStaffNurseUnTrained_Result">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="DistrictNameEn" ColumnName="DistrictNameEn" />
+                <ScalarProperty Name="Total_UnTrained_Staff_Nurse" ColumnName="Total UnTrained Staff Nurse" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_TotalTrainedANM" FunctionName="shsbTrainingModel.Store.SP_TotalTrainedANM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="shsbTrainingModel.SP_TotalTrainedANM_Result">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="DistrictNameEn" ColumnName="DistrictNameEn" />
+                <ScalarProperty Name="Total_Trained_ANM" ColumnName="Total Trained ANM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_TotalTrainedStaffNurse" FunctionName="shsbTrainingModel.Store.SP_TotalTrainedStaffNurse">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="shsbTrainingModel.SP_TotalTrainedStaffNurse_Result">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="DistrictNameEn" ColumnName="DistrictNameEn" />
+                <ScalarProperty Name="Total_Trained_Staff_Nurse" ColumnName="Total Trained Staff Nurse" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_TotalUnTrainedANM" FunctionName="shsbTrainingModel.Store.SP_TotalUnTrainedANM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="shsbTrainingModel.SP_TotalUnTrainedANM_Result">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="DistrictNameEn" ColumnName="DistrictNameEn" />
+                <ScalarProperty Name="Total_UnTrained_ANM" ColumnName="Total UnTrained ANM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="shsbTrainingModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

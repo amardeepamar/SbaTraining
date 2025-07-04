@@ -1,0 +1,72 @@
+﻿@model IEnumerable<DTO.ReportVM>
+
+@{
+    ViewBag.Title = "Get Sba Trained Or Untrained Employee";
+    ViewBag.Heading = "Reports";
+}
+
+
+<div class="row">
+    @Html.Partial("~/Views/Shared/_Breadcrumb.cshtml")
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="card-header">
+
+                        <h4 class="card-title">
+                            Get Sba Trained Or Untrained Personnal (ANM/Staff Nurse)  List
+                        </h4>
+
+                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>District Name</th>
+                                    <th>Total Trained Staff Nurse</th>
+                                    <th>Total UnTrained Staff Nurse</th>
+                                    <th>Total Trained ANM</th>
+                                    <th>Total UnTrained ANM</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="srb_@item.SN">
+                                        <td>@item.SN</td>
+                                        <td>@item.DistrictNameEn</td>
+                                        <td>@item.TotalTrainedStaffNurse</td>
+                                        <td>@item.TotalUnTrainedStaffNurse</td>
+                                        <td>@item.TotalTrainedANM</td>
+                                        <td>@item.TotalUnTrainedANM</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $('.maintable').attr('disabled', true);
+        $('#btnSearch').on("click", function () {
+            $('#maintable').attr('disabled', false);
+
+        });
+    });
+</script>*@

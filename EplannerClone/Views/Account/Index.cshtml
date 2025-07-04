@@ -1,0 +1,53 @@
+﻿@model List<EplannerClone.ViewModels.UserViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">User List</h4>
+                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Mobile No.</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    @if (Session["CurrentUserName"] != null)
+                    {
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Username</td>
+                                    <td>@item.ContactNo</td>
+                                    <td>@item.Email</td>
+                                    <td>
+                                        @if (item.RoleId == 1)
+                                        {
+                                            <span>Superadmin</span>
+                                        }
+                                        else if (item.RoleId == 2)
+                                        {
+                                            <span>Admin</span>
+                                        }
+                                        else
+                                        { <span>Users</span>}
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

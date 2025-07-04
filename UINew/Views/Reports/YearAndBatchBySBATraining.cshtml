@@ -1,0 +1,74 @@
+﻿
+@model IEnumerable<DAL.Employee_Training>
+@{
+    ViewBag.Title = "Year and batch by sba training list";
+    ViewBag.Heading = "Reports";
+}
+
+
+<style type="text/css">
+    .readonly {
+        background-color: #bebebe !important;
+    }
+</style>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#searchForm').on('submit', function (e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                $.ajax({
+                    url: '@Url.Action("YearAndBatchBySBATraining", "Reports")',
+                    type: 'POST',
+                    data: $(this).serialize(), // Serialize form data
+                    success: function (result) {
+                        $('#productTable').html(result); // Load the partial view into the div
+                    },
+                    error: function () {
+                        alert('Error occurred while fetching data.');
+                    }
+                });
+            });
+        });
+</script>
+@using DTO
+@{ 
+    SessionDTO session = (SessionDTO)Session["UserInfo"];
+}
+<div class="row">
+    @Html.Partial("~/Views/Shared/_Breadcrumb.cshtml")
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="card-header">
+                        @using (Html.BeginForm("YearAndBatchBySBATraining", "Reports", FormMethod.Post, new { id = "searchForm" }))
+                        {
+                            <div class="row p-3">
+                                <div class="col-xl-3"> @Html.Label("Search by batch and year")</div>
+                                @if (session.Role == "1" || session.Role == "2")
+                                {
+                                    <div class="col-xl-4">@Html.DropDownList("searchMonthyearmasters", (SelectList)ViewBag.monthyearmasters, "All", new { @class = "form-control", id = "searchMonthyearmasters" })</div>
+                                }
+                                else
+                                {
+                                    <div class="col-xl-4">@Html.DropDownList("searchMonthyearmasters", (SelectList)ViewBag.monthyearmasters, new { @class = "form-control readonly", id = "searchMonthyearmasters" })</div>
+                                }
+                                <div class="col-xl-4">@Html.DropDownList("searchBatchmasters", (SelectList)ViewBag.batchmasters, "All", new { @class = "form-control", id = "searchBatchmasters" })</div>
+                                <div class="col-xl-1"><button type="submit" class="btn btn-default datatable-buttons"><i class="fa fa-2x fa-search"></i></button></div>
+                            </div>
+                        }
+                        <hr />
+                        <!-- Placeholder for Data Table -->
+                        <div id="productTable"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

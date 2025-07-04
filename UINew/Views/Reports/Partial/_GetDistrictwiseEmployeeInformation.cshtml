@@ -1,0 +1,53 @@
+﻿
+@{
+    int i = 1;
+}
+@model IEnumerable<DAL.Employee_info>
+@if (Model != null && Model.Any())
+{
+    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+        <thead>
+            <tr>
+                <th>SNo</th>
+                <th>Name</th>
+                <th>Mobile Number</th>
+                <th>District</th>
+                <th>Block</th>
+                <th>Facility</th>
+                <th>Entry Date</th>
+                <th>Trained</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="shs_@item.Id">
+                    <td>@(i++)</td>
+                    <td>@item.Name (@item.DesignationMaster1.DesignationEn)</td>
+                    <td>@item.MobileNumber</td>
+                    <td>@item.DistrictMaster.DistrictNameEn</td>
+                    <td>@item.BlockMaster.BlockNameEn</td>
+                    <td>@item.FacilityMaster.FacilityName</td>
+                    <td>@item.AddDate.ToString("MM/dd/yyyy")</td>
+                    <td>
+                        @if (item.Istrained == false)
+                        {
+
+                            <span>No</span>
+                        }
+                        else
+                        { <span>Yes</span>}
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+<div class="text-center text-bg-dark p-lg-4 h4">Sba employee information data not found for the selected District.</div>
+    @*if (!string.IsNullOrEmpty(Request.QueryString["searchDistrict"]))
+    {
+        <p>No products found for the selected district.</p>
+    }*@
+}

@@ -1,0 +1,58 @@
+﻿@model EplannerClone.ViewModels.UserViewModel
+@{ 
+    ViewBag.Title = "Registration";
+}
+<div class="account-pages">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card overflow-hidden">
+                    <div class="card-body">                        
+                        <div class="p-2">
+                            <h4 class="text-muted text-center">Registered now.</h4>
+                            <form class="form-horizontal" method="post" action="/account/register">
+                                @Html.AntiForgeryToken()
+                                <div class="mb-2">
+                                    <label for="Email">Email</label>
+                                    <input type="email" class="form-control" id="Email" name="Email" required="required" placeholder="Enter email">
+                                    @Html.ValidationMessageFor(x=>x.Email)
+                                </div>
+                                <div class="mb-2">
+                                    <label for="ContactNo">Contact No</label>
+                                    <input type="text" class="form-control" id="ContactNo" name="ContactNo" required="required" pattern="^[789]\d{9}$" placeholder="Enter contact number">
+                                    @Html.ValidationMessageFor(x => x.ContactNo)
+                                </div>
+                                <div class="mb-2">
+                                    <label for="Username">Username</label>
+                                    <input type="text" class="form-control" id="Username" name="Username" required="required" placeholder="Enter username">
+                                    @Html.ValidationMessageFor(x => x.Username)
+                                </div>
+
+                                <div class="mb-2">
+                                    <label for="Password">Password</label>
+                                    <input type="password" class="form-control" id="Password" name="Password" required="required" placeholder="Enter password">
+                                    @Html.ValidationMessageFor(x => x.Password)
+                                </div>
+                                <div class="mb-2">
+                                    <label for="ConfirmPassword">Repeat Password</label>
+                                    <input type="password" class="form-control" id="ConfirmPassword" required="required" name="ConfirmPassword" placeholder="Enter Repeat Password">
+                                    @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                                </div>
+                                <div class="mb-2">
+                                    <label id="RoleId">Role</label>
+                                    @Html.DropDownListFor(m => m.RoleId, Model.Roles, "-- Select Role --", new { @class = "form-control" })
+                                </div>
+                                <div class="mb-3 row mt-2">
+                                    <div class="col-12 text-end">
+                                        <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Register</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

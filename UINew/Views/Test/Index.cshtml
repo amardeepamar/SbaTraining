@@ -1,0 +1,134 @@
+﻿@model DTO.TestVM
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#BlockId').attr('disabled', true);
+        $('#FacilityId').attr('disabled', true);
+
+        $('#DistrictId').on("change", function () {
+            $('#BlockId').attr('disabled', false);
+            var id =@Model.BlockId
+            id = $(this).val();
+            $('#BlockId').empty();
+            $('#BlockId').append('<Option>-- select block --</Option>');
+             $.ajax({
+                 url: '/Test/BindBlock/' + id,
+                 success: function (result) {
+                     $.each(result, function (i, data) {
+                         $('#BlockId').append('<Option value=' + data.id + ' >' + data.name + '</Option>');
+                     });
+                 }
+             });
+        });
+
+
+            $('#BlockId').on("change", function () {
+                $('#FacilityId').attr('disabled', false);
+              var id =@Model.FacilityId
+              id = $(this).val();
+                $('#FacilityId').empty();
+                $('#FacilityId').append('<Option>-- select Facility --</Option>');
+              $.ajax({
+                  url: '/Test/BindFacility/' + id,
+                  success: function (result) {
+                      $.each(result, function (i, data) {
+                          $('#FacilityId').append('<Option value=' + data.id + ' >' + data.name + '</Option>');
+                      });
+                  }
+              });
+            });
+    });
+
+</script>
+
+
+<div class="row">
+    @Html.Partial("~/Views/Shared/_Breadcrumb.cshtml")
+    <div class="col-xl-10 mx-auto">
+        <div class="card">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="card-header">
+                        @using (Html.BeginForm("Index", "Test", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        {
+
+
+                            <div class="row g-3">
+                                <input type="number" hidden value="@Model.EmployeeId" name="EmployeeId" />
+
+                                <div class="card bg-body-tertiary mb-0">
+                                    <div class="card-body p-2">
+                                        <h5 class="text-black">Posting Place</h5>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <lable>District Name</lable>
+                                    @Html.DropDownList("DistrictId", Model.DistrictType, "Select district type", new { @class = "form-select form-control" })
+                                    @Html.ValidationMessageFor(x => x.DistrictId)
+                                </div>
+                                <div class="col-md-6">
+                                    <lable>Block Name</lable>
+                                    @Html.DropDownList("BlockId", Model.BlockType, "Select block type", new { @class = "form-select form-control" })
+                                    @Html.ValidationMessageFor(x => x.BlockId)
+                                </div>
+                                <div class="col-md-6">
+                                    <lable>Facility Name</lable>
+                                    @Html.DropDownList("FacilityId", Model.FacilityType, "Select facility type", new { @class = "form-select form-control" })
+                                    @Html.ValidationMessageFor(x => x.FacilityId)
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-md-flex d-grid align-items-center pt-4 pull-right">
+                                        <button type="submit" class="btn btn-primary px-4">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.EmployeeList != null && Model.EmployeeList.Any())
+                        {
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Designation</th>
+                                        <th>District</th>
+                                        <th>Block</th>
+                                        <th>Facility</th>
+                                        <th>Trained?</th>
+                                        <th>Training Year</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var emp in Model.EmployeeList)
+                                    {
+                                        <tr>
+                                            <td>@emp.Name</td>
+                                            <td>@emp.MobileNumber</td>
+                                            <td>@emp.DesignationId</td> <!-- Replace with name if needed -->
+                                            <td>@emp.DistrictId</td>
+                                            <td>@emp.BlockId</td>
+                                            <td>@emp.FacilityId</td>
+                                            <td>@(emp.Istrained ? "Yes" : "No")</td>
+                                            <td>@emp.TrainingCompletionYear</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

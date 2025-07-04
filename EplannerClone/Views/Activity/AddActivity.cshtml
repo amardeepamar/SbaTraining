@@ -1,0 +1,49 @@
+﻿@model EplannerClone.ViewModels.ActivityViewModel
+@{
+    ViewBag.Title = "AddActivity";
+}
+
+<div class="card">
+    <div class="card-body p-4">
+        <h5 class="card-title">Manage Activities</h5>
+        <hr />
+        <div class="form-body mt-4">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="border border-3 p-4 rounded">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-control py-2  mb-5">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label class="h6">District:</label>
+                                            <select id="District" name="District" class="form-control">
+                                                <option value="">-- Select District --</option>
+                                                @foreach (var district in ViewBag.dvm)
+                                                {
+                                                    <option value="@district.Id">@district.DistrictNameEn</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="h6">Ac:</label>
+                                            <select id="Ac" name="Ac" class="form-control">
+                                                <option value="">-- Select Ac --</option>
+                                                @foreach (var district in ViewBag.acvm)
+                                                {
+                                                    <option value="@district.AC_NO">@district.AC_NAME_EN</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end row-->
+            </div>
+        </div>
+    </div>

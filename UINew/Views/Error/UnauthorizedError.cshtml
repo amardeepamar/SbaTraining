@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Unauthorized Error";
+    var message = TempData["UnauthorizedMessage"] as string;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-9 col-sm-9 col-md-9 col-lg-9">
+                    <h2>Unauthorized Access</h2>
+
+                    @if (!string.IsNullOrEmpty(message))
+                    {
+                        <div class="alert alert-danger">
+                            @message
+                        </div>
+                    }
+
+                    <p>Please contact your administrator if you believe this is an error.</p>
+                </div>
+                <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+                    <a href="/" class="btn btn-primary btn-outline-primary">Go to home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿
+@model EplannerClone.ViewModels.EditUserDetailsViewModel
+
+@{
+    ViewBag.Title = "Change Profile";
+}
+
+<div class="account-pages">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card overflow-hidden">
+                    <div class="card-body">
+                        <div class="p-2">
+                            <h4 class="text-muted text-center">Change Profile</h4>
+                            <form novalidate="novalidate" action="/account/changeprofile" method="post" class="needs-validation form-horizontal">
+                                @Html.AntiForgeryToken()
+                                <div class="mb-2 col-sm-6">
+                                    <label for="Username">Username</label>
+                                    <input type="text" class="form-control" id="Username" placeholder="Username" name="Username" value="@Model.Username" autofocus="autofocus" />
+                                    @Html.ValidationMessageFor(x => x.Username)
+                                </div>
+                                <div class="mb-2 col-sm-12">
+                                    <label for="Email">Email</label>
+                                    <input type="text" class="form-control" id="Email" placeholder="Enter Email" name="Email" required="required" value="@Model.Email" />
+                                    @Html.ValidationMessageFor(x => x.Email)
+                                </div>
+                                
+                                <div class="mb-2 col-sm-6">
+                                    <label for="ContactNo">Mobile Number</label>
+                                    <input type="text" class="form-control" id="ContactNo" placeholder="Mobile number" name="ContactNo" value="@Model.ContactNo" />
+                                    @Html.ValidationMessageFor(x => x.ContactNo)
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

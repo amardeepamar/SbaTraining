@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Update User";
+    ViewBag.Heading = "Registration";
+}
+<script src="~/Content/assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#RoleId").on("change", function () {
+            $("#RoleName").val($(this).text());
+        });
+    });
+
+    $("#RoleId").change(function () {
+        var url = '@Url.Action("GetUserWithID", "Account")';
+        var data = { id: $(this).val() };
+        $.ajax({
+            type: 'Get',
+            url: url,
+            contentType: 'application/json; charset=utf-8',
+            data: data,
+            dataType: 'json',
+            success: function (userInfo) {
+                $('#RoleName').text('RoleName');  // This does update the view
+                alert(userInfo.Result);
+            },
+            error: function (userInfo) {
+                alert('Failed');
+            }
+        });
+    });
+
+
+</script>
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml")
+
+<div class="row">
+    <div class="col-xl-12 col-12 col-md-12">
+
+        <div class="card">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="card-header col-12 col-md-12">
+                        <div class="text-md-start">
+                            <button type="submit" class="btn btn-primary" onclick="window.location.href='/home/UserList'">Registered User List</button>
+                        </div>
+                        @Html.Partial("~/Views/Shared/MessageForm.cshtml")
+                    </div>
+                    
+                    <div class="card-header">
+                        @using (Html.BeginForm("UpdateUser", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        {
+                            @Html.Partial("~/Views/Home/Partial/_User.cshtml")
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

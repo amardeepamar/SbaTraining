@@ -1,0 +1,55 @@
+﻿@model DTO.TrainingVM
+
+
+
+<div class="row g-3">
+    <input type="number" hidden value="@Model.Id" name="Id" />
+    <div class="card bg-body-tertiary mb-0">
+        <div class="card-body p-2">
+            <div class="d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">Sba Training</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <lable class="col-form-label-lg">Month-Year Name</lable>
+        @Html.DropDownList("MonthYearId", Model.MonthYearType, "Select Month-Year type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.MonthYearId)
+    </div>
+    <div class="col-md-6">
+        <lable class="col-form-label-lg">Batch</lable>
+        @Html.DropDownList("BatchId", Model.BatchType, "Select Batch", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BatchId)
+    </div>
+
+    <div class="col-md-6">
+        <lable class="col-form-label-lg">Designation</lable>
+        @Html.DropDownListFor(x => x.DesignationId, Model.DesignationType, "Select designation type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.DesignationId)
+    </div>
+    <div class="col-md-6">
+        <lable class="col-form-label-lg">Employee Name</lable>
+        @Html.DropDownListFor(x => x.Employee_infoId, Model.EmployeeType, "Select employee type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Employee_infoId)
+    </div>
+
+    <div class="col-md-6">
+        <lable class="col-form-label-lg">From Date</lable>
+        @Html.TextBoxFor(x => x.FromDate, new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(x => x.FromDate)
+    </div>
+    <div class="col-md-6">
+        <lable class="col-form-label-lg">To Date</lable>
+        @Html.TextBoxFor(x => x.ToDate, new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(x => x.ToDate)
+    </div>
+    
+    <div class="col-md-6">
+        <div class="d-md-flex d-grid align-items-center gap-3">
+            <button type="submit" class="btn btn-primary px-4">Submit</button>
+            <a href="/employee/EmpTrainingList" class="btn btn-light px-4">Back to list</a>
+        </div>
+    </div>
+</div>
+
+

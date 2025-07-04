@@ -1,0 +1,51 @@
+﻿
+@model ElectionPlanner.Models.DTO.LoginMasterDTO
+@{
+    ViewBag.Title = "Dashboard";
+
+}
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card p-5">
+            <div class="row">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                    <h4 class="mb-sm-0">Election Planner Dashboard</h4>
+                </div>
+                <div class="col-xl-6 col-sm-6">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="fa fa-eye float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-16 text-white">Page Views</h6>
+                                <h2 class="mb-4 text-white">@ViewData["PageCount"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-6">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="fa fa-users float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-16 text-white">No of Users</h6>
+                                <h2 class="mb-4 text-white">@ViewData["NoOfUsers"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- end page title -->

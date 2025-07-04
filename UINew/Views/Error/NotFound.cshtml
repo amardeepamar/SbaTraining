@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Not Found";
+}
+
+<h2>@ViewBag.ErrorCode - @ViewBag.ErrorMessage</h2>
+
+@if (ViewBag.RequestedUrl != null)
+{
+    <p>The URL you requested: <strong>@ViewBag.RequestedUrl</strong> was not found.</p>
+}
+
+

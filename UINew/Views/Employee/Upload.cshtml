@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Upload Employees";
+}
+
+<h2>Upload Employees</h2>
+
+@using (Html.BeginForm("Upload", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <input type="file" name="file" />
+        <input type="submit" value="Upload" />
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div>
+        @ViewBag.Message
+    </div>
+}

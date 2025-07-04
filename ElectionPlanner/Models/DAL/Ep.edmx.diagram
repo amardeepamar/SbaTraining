@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e2dfc54abdd345c8a1d7cc9a0e5c703c" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="EpModel.DistrictMaster" Width="1.5" PointX="3.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EpModel.Log_Table" Width="1.5" PointX="9" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EpModel.LoginMaster" Width="1.5" PointX="5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EpModel.ProcessType" Width="1.5" PointX="9" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EpModel.RoleMaster" Width="1.5" PointX="7.125" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="EpModel.FK_LoginMasters_DistrictMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="EpModel.FK_Log_Table_ProcessType" ManuallyRouted="false" />
+        <AssociationConnector Association="EpModel.FK_LoginMasters_RoleMasters" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EpModel.CountryMaster" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EpModel.StateMaster" Width="1.5" PointX="0.875" PointY="4.125" />
+        <EntityTypeShape EntityType="EpModel.tblAc" Width="1.5" PointX="4.75" PointY="6" />
+        <AssociationConnector Association="EpModel.FK_DistrictMaster_CountryMaster" />
+        <AssociationConnector Association="EpModel.FK_StateMaster_CountryMaster" />
+        <AssociationConnector Association="EpModel.FK_DistrictMaster_StateMaster" />
+        <AssociationConnector Association="EpModel.FK_tblAc_DistrictMaster" />
+        <AssociationConnector Association="EpModel.FK_LoginMasters_StateMaster" />
+        <AssociationConnector Association="EpModel.FK_LoginMasters_tblAc" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

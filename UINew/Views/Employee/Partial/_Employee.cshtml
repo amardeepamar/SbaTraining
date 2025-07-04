@@ -1,0 +1,91 @@
+﻿@model DTO.EmployeeVM
+
+<script type="text/javascript">$(document).ready(function () {
+        // Toggle year dropdown visibility based on isTrained checkbox
+        $('.isTrainedCheckbox').change(function () {
+            if ($(this).is(':checked')) {
+                $('#trainingYearDiv').show();  // Show year dropdown if checkbox is checked
+            } else {
+                $('#trainingYearDiv').hide();  // Hide year dropdown if checkbox is unchecked
+            }
+        });
+
+        // Check the initial state of the checkbox and adjust visibility
+        if ($('.isTrainedCheckbox').is(':checked')) {
+            $('#trainingYearDiv').show();  // Show year dropdown if already checked
+        } else {
+            $('#trainingYearDiv').hide();  // Hide year dropdown if unchecked
+        }
+    });</script>
+<div class="row g-3">
+    <input type="number" hidden value="@Model.EmployeeId" name="EmployeeId" />
+
+    <div class="card bg-body-tertiary mb-0">
+        <div class="card-body p-2">
+            <h5 class="text-black">Personnal Profile</h5>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label for="Name" class="form-label">Employee Name</label>
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Employee Name" })
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+    <div class="col-md-6">
+        <label for="MobileNumber" class="form-label">Contact Number</label>
+        @Html.TextBoxFor(x => x.MobileNumber, new { @class = "form-control", @placeholder = "Contact Number", @required = "required", title = "Please enter exactly 10 digits", maxlength = "10" })
+        @Html.ValidationMessageFor(x => x.MobileNumber)
+    </div>
+    <div class="col-md-6">
+        <lable>Designation</lable>
+        @Html.DropDownList("DesignationId", Model.DesignationType, "Select designation type", new { @class = "form-control" })
+        @*@Html.HiddenFor(m => m.DesignationName, new { @class = "form-control" })*@
+        @Html.ValidationMessageFor(x => x.DesignationId)
+    </div>
+    <div class="col-md-3">
+        <div class="form-check pt-4">
+            @Html.CheckBoxFor(x=>x.Istrained,new { @class = "form-check-input isTrainedCheckbox" })
+            @*<input type="checkbox" class="form-check-input isTrainedCheckbox" id="Istrained" name="Istrained" value="@(Model.Istrained ? 0 : 1)"  />*@
+            <label class="form-check-label">Is Trained?</label>
+        </div>
+    </div>
+    <div class="col-md-3" id="trainingYearDiv" style="display:none;">
+        @Html.Label("Training Completion Year", new { @class = "control-label" })
+
+
+        <!-- Dropdown for Training Completion Year -->
+        @Html.DropDownListFor(model => model.TrainingCompletionYear,
+                         new SelectList(Model.TrainingCompletionDates, "Value", "Text"),
+                         "Select Year",
+                         new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(model => model.TrainingCompletionYear, "", new { @class = "text-danger" })
+    </div>
+    <div class="card bg-body-tertiary mb-0">
+        <div class="card-body p-2">
+            <h5 class="text-black">Posting Place</h5>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <lable>District Name</lable>
+        @Html.DropDownList("DistrictId", Model.DistrictType, "Select district type", new { @class = "form-select form-control" })
+        @Html.ValidationMessageFor(x => x.DistrictId)
+    </div>
+    <div class="col-md-6">
+        <lable>Block Name</lable>
+        @Html.DropDownList("BlockId", Model.BlockType, "Select block type", new { @class = "form-select form-control" })
+        @Html.ValidationMessageFor(x => x.BlockId)
+    </div>
+    <div class="col-md-6">
+        <lable>Facility Name</lable>
+        @Html.DropDownList("FacilityId", Model.FacilityType, "Select facility type", new { @class = "form-select form-control" })
+        @Html.ValidationMessageFor(x => x.FacilityId)
+    </div>
+    <div class="col-md-6">
+        <div class="d-md-flex d-grid align-items-center pt-4 pull-right">
+            <button type="submit" class="btn btn-primary px-4">Submit</button>
+            <a href="/employee" class="btn btn-light px-4">Back to list</a>
+        </div>
+    </div>
+</div>

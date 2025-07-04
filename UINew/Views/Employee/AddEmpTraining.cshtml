@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Add Employee Training";
+    ViewBag.Heading = "Training";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //alert('ok');
+        $('#Employee_infoId').attr('disabled', true);
+
+        $('#DesignationId').change(function () {
+            $('#Employee_infoId').attr('disabled', false);
+            var id = $(this).val();
+            $('#Employee_infoId').empty();
+            $('#Employee_infoId').append('<Option>--Select --</Option>');
+
+            $.ajax({
+                url: '/Employee/BindEmpTraining/' + id,
+                success: function (result) {
+                    $.each(result, function (i, data) {
+                        $('#Employee_infoId').append('<Option value=' + data.id + '>' + data.name + '</Option>');
+                    });
+                }
+            });
+        });
+
+        document.getElementById('FromDate').addEventListener('change', function () {
+            const fromDate = new Date(this.value);
+            if (!isNaN(fromDate.getTime())) {
+                const toDate = new Date(fromDate);
+                toDate.setDate(fromDate.getDate() + 20);
+                const year = toDate.getFullYear();
+                const month = String(toDate.getMonth() + 1).padStart(2, '0');
+                const day = String(toDate.getDate()).padStart(2, '0');
+                document.getElementById('ToDate').value = `${year}-${month}-${day}`;
+            } else {
+                document.getElementById('ToDate').value = '';
+            }
+        });
+
+    });
+</script>
+
+
+<div class="row">
+    @Html.Partial("~/Views/Shared/_Breadcrumb.cshtml")
+    <div class="col-xl-10 mx-auto">
+        <div class="card">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="card-header col-md-6">
+                        <div class="text-md-start">
+                            <button type="submit" class="btn btn-primary" onclick="window.location.href='/employee/EmpTrainingList'">Employee Training List</button>
+                        </div>
+                    </div>
+                    <div class="card-header col-md-6">
+                        @Html.Partial("~/Views/Shared/MessageForm.cshtml")
+                    </div>
+                    <div class="card-header">
+                        @using (Html.BeginForm("AddEmpTraining", "Employee", FormMethod.Post))
+                        {
+                            @Html.Partial("~/Views/Employee/Partial/_Training.cshtml")
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,291 @@
+﻿@using ElectionPlanner.Models.DTO
+@{
+    SessionDTO session = (SessionDTO)Session["UserInfo"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title | ELECTION PLANNER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/assets/images/favicon.ico">
+    <!-- Bootstrap Css -->
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Icons Css -->
+    <link href="~/Content/assets/css/icons.min.css" rel="stylesheet" />
+    <!-- App Css-->
+    <link href="~/Content/assets/css/app.min.css" rel="stylesheet" />
+    <!-- DataTables -->
+    <link href="~/Content/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <!-- Responsive datatable examples -->
+    <link href="~/Content/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    @*<script src="~/Content/jquery.min.js"></script>*@
+    <script src="~/Content/assets/libs/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="~/Content/UserValidation.js"></script>
+    @{
+        if (TempData["SuccessMessage"] != null)
+        {
+            <script>swal("@TempData["Title"]", "@TempData["SuccessMessage"]", "success");</script>
+        }
+        if (TempData["WarningMessage"] != null)
+        {
+            <script>swal("@TempData["Title"]", "@TempData["WarningMessage"]", "warning");</script>
+        }
+        if (TempData["InfoMessage"] != null)
+        {
+            <script>swal("@TempData["Title"]", "@TempData["InfoMessage"]", "info");</script>
+        }
+        if (TempData["ErrorMessage"] != null)
+        {
+            <script>swal("@TempData["Title"]", "@TempData["ErrorMessage"]", "error");</script>
+        }
+    }
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+</head>
+<body data-sidebar="dark">
+    <!-- <body data-layout="horizontal" data-topbar="colored"> -->
+    @Html.Partial("~/Views/Shared/_ToastrNotification.cshtml")
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="javascript:void(0);" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="~/Content/SPMU/logo.png" height="30" width="30" />
+                            </span>
+                            <span class="logo-lg" style="color:white;">
+                                <img src="~/Content/SPMU/logo.png" alt="" height="70" width="120" />
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect vertical-menu-btn">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </div>
+                <div class="d-flex">
+                    <div class="dropdown d-none d-lg-inline-block">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                            <i class="mdi mdi-fullscreen font-size-24"></i>
+                        </button>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/Content/UserImage/@session.Imagepath" class="rounded-circle header-profile-user" alt="user avatar">
+                                <span class="font-weight-semibold">@session.RoleName </span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-account-circle font-size-17 text-muted align-middle me-1"></i> Profile</a>
+
+                                <a class="dropdown-item text-danger" href="/home/logout"><i class="mdi mdi-power font-size-17 text-muted align-middle me-1 text-danger"></i> Logout</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </header>
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+            <div data-simplebar class="h-100">
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="menu-title">@session.Namesurname (@session.Username)</li>
+                        }
+                        <li>
+                            <a href="/dashboard" class="waves-effect">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        @{
+                            @*string[] roles = System.Web.Security.Roles.GetRolesForUser(User.Identity.Name);
+            <li>Roles: @string.Join(", ", roles)</li>*@
+
+
+
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("Superadmin"))
+                                {
+                                    <li>
+                                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                            <i class="fa fa-users"></i>
+                                            <span>Users</span>
+                                        </a>
+                                        <ul class="sub-menu" aria-expanded="false">
+                                            <li><a href="/Home/AddUser" class="waves-effect"><i class="mdi mdi-plus"></i><span>Add Users</span></a></li>
+                                            <li><a href="/home/userlist" class="waves-effect"><i class="mdi mdi-plus"></i><span>Users List</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                            <i class="mdi mdi-vote"></i>
+                                            <span>Election Poll</span>
+                                        </a>
+                                        <ul class="sub-menu" aria-expanded="false">
+                                            <li><a href="/ElectionPlanner/AddOrUpdatePollDay" class="waves-effect"><i class="mdi mdi-plus"></i><span>Add Poll Day</span></a></li>
+                                            <li><a href="/ElectionPlanner/AddOrUpdatePollDaySubLayer" class="waves-effect"><i class="mdi mdi-plus"></i><span>Add Poll Day SubLayer</span></a></li>
+
+                                            <li><a href="/ElectionPlanner/AddOrUpdateActivities" class="waves-effect"><i class="mdi mdi-plus"></i><span>Add Activities</span></a></li>
+                                        </ul>
+                                    </li>
+                                }
+
+                                else
+                                {
+                                    if (User.IsInRole("Administrator"))
+                                    {
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="fa fa-users"></i>
+                                                <span>Users</span>
+                                            </a>
+                                            <ul class="sub-menu" aria-expanded="false">
+                                                <li><a href="/Home/AddUser" class="waves-effect"><i class="mdi mdi-plus"></i><span>Add Users</span></a></li>
+                                                <li><a href="/home/userlist" class="waves-effect"><i class="mdi mdi-plus"></i><span>Users List</span></a></li>
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="mdi mdi-vote"></i>
+                                                <span>Election Poll</span>
+                                            </a>
+                                            <ul class="sub-menu" aria-expanded="false">
+                                                <li><a href="/ElectionPlanner/AddOrUpdatePollDay" class="waves-effect"><i class="mdi mdi-plus"></i><span>Add Poll Day</span></a></li>
+                                                <li><a href="/ElectionPlanner/AddOrUpdatePollDaySubLayer" class="waves-effect"><i class="mdi mdi-plus"></i><span>Add Poll Day SubLayer</span></a></li>
+
+                                                <li><a href="/ElectionPlanner/AddOrUpdateActivities" class="waves-effect"><i class="mdi mdi-plus"></i><span>Add Activities</span></a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+
+                            }
+
+                        }
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- End Page-content -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            ©
+                            <script>document.write(new Date().getFullYear())</script> ELECTION PLANNER , BIHAR <span class="d-none d-sm-inline-block">Design & Developed by:- Software Education and Research.</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+    <!-- JAVASCRIPT -->
+    <script src="~/Content/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/Content/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/Content/assets/libs/node-waves/waves.min.js"></script>
+    <script src="~/Content/assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!-- Required datatable js -->
+    <script src="~/Content/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="~/Content/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Content/assets/libs/jszip/jszip.min.js"></script>
+    <script src="~/Content/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/Content/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="~/Content/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="~/Content/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Content/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <!-- Datatable init js -->
+    <script src="~/Content/assets/js/pages/datatables.init.js"></script>
+    <!--Toaster-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <!-- Sweet Alerts js -->
+    <script src="~/Content/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Sweet alert init js-->
+    <script src="~/Content/assets/js/pages/sweet-alerts.init.js"></script>
+    <!--Password show & hide js -->
+    <script>
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("bx-hide");
+                    $('#show_hide_password i').removeClass("bx-show");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bx-hide");
+                    $('#show_hide_password i').addClass("bx-show");
+                }
+            });
+        });
+    </script>
+    <style>
+        #example2_wrapper label {
+            display: contents !important;
+        }
+
+            #example2_wrapper label input {
+                Margin-left: 5px !important;
+            }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example2').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'print']
+            });
+
+            table.buttons().container()
+                .appendTo('#example2_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+    <!-- App js -->
+    <script src="~/Content/assets/js/app.js"></script>
+</body>
+</html>

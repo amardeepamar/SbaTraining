@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d493794c2a144b119d70296a511efb8a" Name="Diagram1">
+        <EntityTypeShape EntityType="shsbTrainingModel.BlockMaster" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.DesignationMaster" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.DistrictMaster" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.Employee_info" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.Employee_Training" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.FacilityMaster" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.Log_Table" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.LoginMaster" Width="1.5" PointX="13.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.MonthYearMaster" Width="1.5" PointX="16.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.ProcessType" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.RoleMaster" Width="1.5" PointX="11.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.tblBatchMaster" Width="1.5" PointX="16.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="shsbTrainingModel.tblEmployee" Width="1.5" PointX="15.75" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="shsbTrainingModel.FK_BlockMaster_DistrictMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_info_BlockMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_FacilityMaster_BlockMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_LoginMasters_BlockMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_DesignationMaster_SBATraining" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_DesignationMasterEmployeeInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_info_DesignationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_Training_DesignationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_info_DistrictMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_FacilityMaster_DistrictMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_LoginMasters_DistrictMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_info_FacilityMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_info_LoginMasters" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_Training_Employee_info" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_Training_LoginMasters" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_Training_MonthYearMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Employee_Training_tblBatchMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_FacilityMaster_LoginMasters" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_LoginMasters_FacilityMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_Log_Table_ProcessType" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_LoginMasters_RoleMasters" ManuallyRouted="false" />
+        <AssociationConnector Association="shsbTrainingModel.FK_tblEmployee_tblEmployee" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="shsbTrainingModel.ErrorLog" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

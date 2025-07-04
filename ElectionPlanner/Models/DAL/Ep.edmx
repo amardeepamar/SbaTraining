@@ -1,0 +1,681 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CountryMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryNameHn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DistrictMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DistCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DistrictNameHn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log_Table">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IPAdress" Type="nvarchar(max)" />
+          <Property Name="ProcessID" Type="int" Nullable="false" />
+          <Property Name="ProcessType" Type="int" Nullable="false" />
+          <Property Name="ProcessCategoryType" Type="nvarchar(max)" />
+          <Property Name="ProcessDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginMasters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="NameSurname" Type="nvarchar(max)" />
+          <Property Name="ImagePath" Type="varchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="AddDate" Type="date" />
+          <Property Name="LastUpdateUserID" Type="int" />
+          <Property Name="LastUpdateDate" Type="date" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="50" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="DistId" Type="int" />
+          <Property Name="AcId" Type="int" />
+        </EntityType>
+        <EntityType Name="ProcessType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcessName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RoleMasters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="date" />
+          <Property Name="AddDate" Type="date" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateNameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateNameHn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblAc">
+          <Key>
+            <PropertyRef Name="AC_NO" />
+          </Key>
+          <Property Name="AC_NO" Type="int" Nullable="false" />
+          <Property Name="DIST_NO" Type="int" />
+          <Property Name="AC_NAME_HN" Type="nvarchar" MaxLength="50" />
+          <Property Name="AC_NAME_EN" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="AddDate" Type="date" />
+        </EntityType>
+        <Association Name="FK_DistrictMaster_CountryMaster">
+          <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="0..1" />
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DistrictMaster">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistrictMaster_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DistrictMaster">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_Table_ProcessType">
+          <End Role="ProcessType" Type="Self.ProcessType" Multiplicity="1" />
+          <End Role="Log_Table" Type="Self.Log_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Log_Table">
+              <PropertyRef Name="ProcessType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="DistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_RoleMasters">
+          <End Role="RoleMasters" Type="Self.RoleMasters" Multiplicity="1" />
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_tblAc">
+          <End Role="tblAc" Type="Self.tblAc" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAc">
+              <PropertyRef Name="AC_NO" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="AcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateMaster_CountryMaster">
+          <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="0..1" />
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StateMaster">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAc_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="0..1" />
+          <End Role="tblAc" Type="Self.tblAc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblAc">
+              <PropertyRef Name="DIST_NO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EpModelStoreContainer">
+          <EntitySet Name="CountryMaster" EntityType="Self.CountryMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DistrictMaster" EntityType="Self.DistrictMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log_Table" EntityType="Self.Log_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginMasters" EntityType="Self.LoginMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessType" EntityType="Self.ProcessType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMasters" EntityType="Self.RoleMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAc" EntityType="Self.tblAc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DistrictMaster_CountryMaster" Association="Self.FK_DistrictMaster_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMaster" />
+            <End Role="DistrictMaster" EntitySet="DistrictMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistrictMaster_StateMaster" Association="Self.FK_DistrictMaster_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMaster" />
+            <End Role="DistrictMaster" EntitySet="DistrictMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_Table_ProcessType" Association="Self.FK_Log_Table_ProcessType">
+            <End Role="ProcessType" EntitySet="ProcessType" />
+            <End Role="Log_Table" EntitySet="Log_Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_DistrictMaster" Association="Self.FK_LoginMasters_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMaster" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_RoleMasters" Association="Self.FK_LoginMasters_RoleMasters">
+            <End Role="RoleMasters" EntitySet="RoleMasters" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_StateMaster" Association="Self.FK_LoginMasters_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMaster" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_tblAc" Association="Self.FK_LoginMasters_tblAc">
+            <End Role="tblAc" EntitySet="tblAc" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateMaster_CountryMaster" Association="Self.FK_StateMaster_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMaster" />
+            <End Role="StateMaster" EntitySet="StateMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAc_DistrictMaster" Association="Self.FK_tblAc_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMaster" />
+            <End Role="tblAc" EntitySet="tblAc" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DistrictMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DistCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictNameEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DistrictNameHn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LoginMasters" Relationship="Self.FK_LoginMasters_DistrictMaster" FromRole="DistrictMaster" ToRole="LoginMasters" />
+          <NavigationProperty Name="CountryMaster" Relationship="EpModel.FK_DistrictMaster_CountryMaster" FromRole="DistrictMaster" ToRole="CountryMaster" />
+          <NavigationProperty Name="StateMaster" Relationship="EpModel.FK_DistrictMaster_StateMaster" FromRole="DistrictMaster" ToRole="StateMaster" />
+          <NavigationProperty Name="tblAcs" Relationship="EpModel.FK_tblAc_DistrictMaster" FromRole="DistrictMaster" ToRole="tblAc" />
+        </EntityType>
+        <EntityType Name="Log_Table">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IPAdress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessID" Type="Int32" Nullable="false" />
+          <Property Name="ProcessType" Type="Int32" Nullable="false" />
+          <Property Name="ProcessCategoryType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProcessType1" Relationship="Self.FK_Log_Table_ProcessType" FromRole="Log_Table" ToRole="ProcessType" />
+        </EntityType>
+        <EntityType Name="LoginMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NameSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="AddDate" Type="DateTime" Precision="0" />
+          <Property Name="LastUpdateUserID" Type="Int32" />
+          <Property Name="LastUpdateDate" Type="DateTime" Precision="0" />
+          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="DistId" Type="Int32" />
+          <NavigationProperty Name="DistrictMaster" Relationship="Self.FK_LoginMasters_DistrictMaster" FromRole="LoginMasters" ToRole="DistrictMaster" />
+          <NavigationProperty Name="RoleMaster" Relationship="Self.FK_LoginMasters_RoleMasters" FromRole="LoginMasters" ToRole="RoleMasters" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="AcId" Type="Int32" />
+          <NavigationProperty Name="StateMaster" Relationship="EpModel.FK_LoginMasters_StateMaster" FromRole="LoginMaster" ToRole="StateMaster" />
+          <NavigationProperty Name="tblAc" Relationship="EpModel.FK_LoginMasters_tblAc" FromRole="LoginMaster" ToRole="tblAc" />
+        </EntityType>
+        <EntityType Name="ProcessType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcessName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Log_Table" Relationship="Self.FK_Log_Table_ProcessType" FromRole="ProcessType" ToRole="Log_Table" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="LoginMasters" Relationship="Self.FK_LoginMasters_RoleMasters" FromRole="RoleMasters" ToRole="LoginMasters" />
+        </EntityType>
+        <Association Name="FK_LoginMasters_DistrictMaster">
+          <End Role="DistrictMaster" Type="Self.DistrictMaster" Multiplicity="0..1" />
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="DistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_Table_ProcessType">
+          <End Role="ProcessType" Type="Self.ProcessType" Multiplicity="1" />
+          <End Role="Log_Table" Type="Self.Log_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Log_Table">
+              <PropertyRef Name="ProcessType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_RoleMasters">
+          <End Role="RoleMasters" Type="Self.RoleMaster" Multiplicity="1" />
+          <End Role="LoginMasters" Type="Self.LoginMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMasters">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DistrictMasters" EntityType="Self.DistrictMaster" />
+          <EntitySet Name="Log_Table" EntityType="Self.Log_Table" />
+          <EntitySet Name="LoginMasters" EntityType="Self.LoginMaster" />
+          <EntitySet Name="ProcessTypes" EntityType="Self.ProcessType" />
+          <EntitySet Name="RoleMasters" EntityType="Self.RoleMaster" />
+          <AssociationSet Name="FK_LoginMasters_DistrictMaster" Association="Self.FK_LoginMasters_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMasters" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_Table_ProcessType" Association="Self.FK_Log_Table_ProcessType">
+            <End Role="ProcessType" EntitySet="ProcessTypes" />
+            <End Role="Log_Table" EntitySet="Log_Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_RoleMasters" Association="Self.FK_LoginMasters_RoleMasters">
+            <End Role="RoleMasters" EntitySet="RoleMasters" />
+            <End Role="LoginMasters" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <EntitySet Name="CountryMasters" EntityType="EpModel.CountryMaster" />
+          <EntitySet Name="StateMasters" EntityType="EpModel.StateMaster" />
+          <EntitySet Name="tblAcs" EntityType="EpModel.tblAc" />
+          <AssociationSet Name="FK_DistrictMaster_CountryMaster" Association="EpModel.FK_DistrictMaster_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMasters" />
+            <End Role="DistrictMaster" EntitySet="DistrictMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateMaster_CountryMaster" Association="EpModel.FK_StateMaster_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMasters" />
+            <End Role="StateMaster" EntitySet="StateMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistrictMaster_StateMaster" Association="EpModel.FK_DistrictMaster_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMasters" />
+            <End Role="DistrictMaster" EntitySet="DistrictMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAc_DistrictMaster" Association="EpModel.FK_tblAc_DistrictMaster">
+            <End Role="DistrictMaster" EntitySet="DistrictMasters" />
+            <End Role="tblAc" EntitySet="tblAcs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_StateMaster" Association="EpModel.FK_LoginMasters_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMasters" />
+            <End Role="LoginMaster" EntitySet="LoginMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginMasters_tblAc" Association="EpModel.FK_LoginMasters_tblAc">
+            <End Role="tblAc" EntitySet="tblAcs" />
+            <End Role="LoginMaster" EntitySet="LoginMasters" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CountryMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryNameHn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DistrictMasters" Relationship="EpModel.FK_DistrictMaster_CountryMaster" FromRole="CountryMaster" ToRole="DistrictMaster" />
+          <NavigationProperty Name="StateMasters" Relationship="EpModel.FK_StateMaster_CountryMaster" FromRole="CountryMaster" ToRole="StateMaster" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateNameEn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateNameHn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CountryMaster" Relationship="EpModel.FK_StateMaster_CountryMaster" FromRole="StateMaster" ToRole="CountryMaster" />
+          <NavigationProperty Name="DistrictMasters" Relationship="EpModel.FK_DistrictMaster_StateMaster" FromRole="StateMaster" ToRole="DistrictMaster" />
+          <NavigationProperty Name="LoginMasters" Relationship="EpModel.FK_LoginMasters_StateMaster" FromRole="StateMaster" ToRole="LoginMaster" />
+        </EntityType>
+        <EntityType Name="tblAc">
+          <Key>
+            <PropertyRef Name="AC_NO" />
+          </Key>
+          <Property Name="AC_NO" Type="Int32" Nullable="false" />
+          <Property Name="DIST_NO" Type="Int32" />
+          <Property Name="AC_NAME_HN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AC_NAME_EN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DistrictMaster" Relationship="EpModel.FK_tblAc_DistrictMaster" FromRole="tblAc" ToRole="DistrictMaster" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="AddDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="LoginMasters" Relationship="EpModel.FK_LoginMasters_tblAc" FromRole="tblAc" ToRole="LoginMaster" />
+        </EntityType>
+        <Association Name="FK_DistrictMaster_CountryMaster">
+          <End Type="EpModel.CountryMaster" Role="CountryMaster" Multiplicity="0..1" />
+          <End Type="EpModel.DistrictMaster" Role="DistrictMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DistrictMaster">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateMaster_CountryMaster">
+          <End Type="EpModel.CountryMaster" Role="CountryMaster" Multiplicity="0..1" />
+          <End Type="EpModel.StateMaster" Role="StateMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StateMaster">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistrictMaster_StateMaster">
+          <End Type="EpModel.StateMaster" Role="StateMaster" Multiplicity="0..1" />
+          <End Type="EpModel.DistrictMaster" Role="DistrictMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DistrictMaster">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAc_DistrictMaster">
+          <End Type="EpModel.DistrictMaster" Role="DistrictMaster" Multiplicity="0..1" />
+          <End Type="EpModel.tblAc" Role="tblAc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblAc">
+              <PropertyRef Name="DIST_NO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_StateMaster">
+          <End Type="EpModel.StateMaster" Role="StateMaster" Multiplicity="0..1" />
+          <End Type="EpModel.LoginMaster" Role="LoginMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginMaster">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginMasters_tblAc">
+          <End Type="EpModel.tblAc" Role="tblAc" Multiplicity="0..1" />
+          <End Type="EpModel.LoginMaster" Role="LoginMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAc">
+              <PropertyRef Name="AC_NO" />
+            </Principal>
+            <Dependent Role="LoginMaster">
+              <PropertyRef Name="AcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EpModelStoreContainer" CdmEntityContainer="EpEntities">
+          <EntitySetMapping Name="DistrictMasters">
+            <EntityTypeMapping TypeName="EpModel.DistrictMaster">
+              <MappingFragment StoreEntitySet="DistrictMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DistCode" ColumnName="DistCode" />
+                <ScalarProperty Name="DistrictNameEn" ColumnName="DistrictNameEn" />
+                <ScalarProperty Name="DistrictNameHn" ColumnName="DistrictNameHn" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log_Table">
+            <EntityTypeMapping TypeName="EpModel.Log_Table">
+              <MappingFragment StoreEntitySet="Log_Table">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IPAdress" ColumnName="IPAdress" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+                <ScalarProperty Name="ProcessType" ColumnName="ProcessType" />
+                <ScalarProperty Name="ProcessCategoryType" ColumnName="ProcessCategoryType" />
+                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginMasters">
+            <EntityTypeMapping TypeName="EpModel.LoginMaster">
+              <MappingFragment StoreEntitySet="LoginMasters">
+                <ScalarProperty Name="AcId" ColumnName="AcId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateUserID" ColumnName="LastUpdateUserID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="DistId" ColumnName="DistId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessTypes">
+            <EntityTypeMapping TypeName="EpModel.ProcessType">
+              <MappingFragment StoreEntitySet="ProcessType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMasters">
+            <EntityTypeMapping TypeName="EpModel.RoleMaster">
+              <MappingFragment StoreEntitySet="RoleMasters">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CountryMasters">
+            <EntityTypeMapping TypeName="EpModel.CountryMaster">
+              <MappingFragment StoreEntitySet="CountryMaster">
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CountryNameHn" ColumnName="CountryNameHn" />
+                <ScalarProperty Name="CountryNameEn" ColumnName="CountryNameEn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateMasters">
+            <EntityTypeMapping TypeName="EpModel.StateMaster">
+              <MappingFragment StoreEntitySet="StateMaster">
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateNameHn" ColumnName="StateNameHn" />
+                <ScalarProperty Name="StateNameEn" ColumnName="StateNameEn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAcs">
+            <EntityTypeMapping TypeName="EpModel.tblAc">
+              <MappingFragment StoreEntitySet="tblAc">
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="AC_NAME_EN" ColumnName="AC_NAME_EN" />
+                <ScalarProperty Name="AC_NAME_HN" ColumnName="AC_NAME_HN" />
+                <ScalarProperty Name="DIST_NO" ColumnName="DIST_NO" />
+                <ScalarProperty Name="AC_NO" ColumnName="AC_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

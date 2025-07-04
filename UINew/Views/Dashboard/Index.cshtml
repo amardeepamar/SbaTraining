@@ -1,0 +1,151 @@
+﻿
+@model DTO.LoginMasterDTO
+@{
+    ViewBag.Title = "Dashboard";
+
+}
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card p-5">
+            <div class="row">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                    <h4 class="mb-sm-0">Dashboard</h4>
+                </div>
+
+
+
+                <div class="col-xl-6 col-sm-6">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="fa fa-eye float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-16 text-white">Page Views</h6>
+                                <h2 class="mb-4 text-white">@ViewData["PageCount"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-6">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="fa fa-users float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-16 text-white">No of Users</h6>
+                                <h2 class="mb-4 text-white">@ViewData["NoOfUsers"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                    <h4 class="mb-sm-0">Designation-Wise Employee</h4>
+                </div>
+                <div class="col-xl-4 col-sm-4">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="mdi mdi-nature-people float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-14 text-white">Total Employee</h6>
+                                <h2 class="mb-4 text-white">@ViewData["TotalEmployee"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-sm-4">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="mdi mdi-nature-people float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-16 text-white">Staff Nurse</h6>
+                                <h2 class="mb-4 text-white">@ViewData["TotalDesignationWiseStaffNurse"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-sm-4">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="mdi mdi-nature-people float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-16 text-white">ANM</h6>
+                                <h2 class="mb-4 text-white">@ViewData["TotalDesignationWiseANM"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                    <h4 class="mb-sm-0">Trained Employee</h4>
+                </div>
+                <div class="col-xl-4 col-sm-4">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="mdi mdi-pac-man float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-14 text-white">Total Training</h6>
+                                <h2 class="mb-4 text-white">@ViewData["TotalTraining"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-sm-4">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="mdi mdi-nature-people float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-16 text-white">Staff Nurse</h6>
+                                <h2 class="mb-4 text-white">@ViewData["TotalTrainedStaffNurse"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-sm-4">
+                    <div class="card mini-stat bg-primary">
+                        <div class="card-body mini-stat-img">
+                            <div class="mini-stat-icon">
+                                <i class="mdi mdi-nature-people float-end"></i>
+                            </div>
+                            <div class="text-white">
+                                <h6 class="text-uppercase mb-3 font-size-16 text-white">ANM</h6>
+                                <h2 class="mb-4 text-white">@ViewData["TotalTrainedANM"]</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+        </div>
+    </div>
+</div>
+
+
+
+<!-- end page title -->

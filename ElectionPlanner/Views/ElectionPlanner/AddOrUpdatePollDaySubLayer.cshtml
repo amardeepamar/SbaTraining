@@ -1,0 +1,169 @@
+﻿@model List<ElectionPlanner.Models.DTO.PollDaySubLayerDTO>
+@{
+    ViewBag.Title = "Manage PollDay Sublayer";
+}
+
+
+<div class="card">
+    <div class="card-body p-4">
+        <h5 class="card-title">Manage PollDay Sublayer</h5>
+        <hr />
+        <div class="form-body mt-4">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="border border-3 p-4 rounded">
+                        <div class="row">
+                            <h5 class="card-title">Add PollDay Sublayer</h5>
+                            <hr />
+                            <!-- Add/Update Form -->
+                            <form id="polldaySubLayerForm" method="post" action="@Url.Action("AddOrUpdatePollDaySubLayer", "ElectionPlanner")">
+                                <input type="hidden" id="Id" name="Id" value="0" />
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group  pb-3">
+                                            <label class="h6">PollDay Name:</label>
+                                            <select id="PollDayId" class="form-control" name="PollDayId">
+                                                <option value="-11">Please Select</option>
+                                                @foreach (var pollday in ViewBag.pollday as List<ElectionPlanner.Models.DTO.PollDayDTO>)
+                                                {
+                                                    <option value="@pollday.Id">@pollday.PollDayNameEN</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group pb-2">
+                                            <label class="h6">PollDay Sublayer Name:</label>
+                                            <input type="text" id="PollDaySubLayerNameEN" name="PollDaySubLayerNameEN" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group pb-2">
+                                            <label class="h6">Starting Day:</label>
+                                            <input type="number" id="StartingDay" name="StartingDay" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group pb-2">
+                                            <label class="h6">Ending Day:</label>
+                                            <input type="number" id="EndingDay" name="EndingDay" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group pb-2">
+                                            <label class="h6">Duration:</label>
+                                            <input type="text" id="Duration" name="Duration" readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group pb-2">
+                                            <label class="h6">Shows on:</label><br />
+                                            <div class="pt-2">
+                                                <label><input type="checkbox" id="StateId" name="StateId" class="checkbox-row" /> State</label>
+                                                <label><input type="checkbox" id="DistId" name="StateId" class="checkbox-row" /> District</label>
+                                                <label><input type="checkbox" id="AcId" name="StateId" class="checkbox-row" /> AC</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="border border-3 p-4 rounded">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <h5 class="card-title">PollDay Sublayer Lists</h5>
+                                    <hr />
+                                    <table id="example2" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>PollDay SubLayer Name</th>
+                                                <th>PollDay Name</th>
+                                                <th>Starting Day</th>
+                                                <th>Ending Day</th>
+                                                <th>Duration</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var polldaysublayer in Model)
+                                            {
+                                                <tr id="ceo_@polldaysublayer.Id">
+                                                    <td>@polldaysublayer.PollDaySubLayerNameEN</td>
+                                                    <td>@polldaysublayer.PollDayNameEN</td>
+
+                                                    <td>@polldaysublayer.StartingDay</td>
+                                                    <td>@polldaysublayer.EndingDay</td>
+                                                    <td>@polldaysublayer.Duration</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-warning" onclick="editPollDaySubLayer(@polldaysublayer.Id,'@polldaysublayer.PollDaySubLayerNameEN' , @polldaysublayer.PollDayId,@polldaysublayer.StartingDay,@polldaysublayer.EndingDay,@polldaysublayer.Duration)">Update</button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>PollDay SubLayer Name</th>
+                                                <th>PollDay Name</th>
+                                                <th>Starting Day</th>
+                                                <th>Ending Day</th>
+                                                <th>Duration</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--end row-->
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    // calculate Duration Start
+    function calculateDuration() {
+        var startingDay = parseInt($("#StartingDay").val());
+        var endingDay = parseInt($("#EndingDay").val());
+
+        if (!isNaN(startingDay) && !isNaN(endingDay) && startingDay >= endingDay) {
+            var duration = (startingDay - endingDay) + 1;
+            $("#Duration").val(duration);  // Set duration automatically
+        } else {
+            $("#Duration").val("");  // Clear if values are invalid
+        }
+    }
+
+    // Trigger calculation on change
+    $("#StartingDay, #EndingDay").on("input", calculateDuration);
+
+    // calculate Duration end
+
+    // Populate form for editing
+    function editPollDaySubLayer(polldaysublayerId, polldaySubLayer, polldayId, sday, eday, duration) {
+        document.getElementById('Id').value = polldaysublayerId;
+        document.getElementById('PollDaySubLayerNameEN').value = polldaySubLayer;
+        document.getElementById('PollDayId').value = polldayId;
+        document.getElementById('StartingDay').value = sday;
+        document.getElementById('EndingDay').value = eday;
+        // Ensure duration is calculated dynamically
+        calculateDuration();
+    }
+    
+</script>
+
